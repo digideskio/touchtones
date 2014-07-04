@@ -30,6 +30,7 @@
           var name = $(this).data('name');
           console.log(name);
           SOUNDS[name].play();
+          $('.btn-reload').removeClass('disabled');
         });
         $('.btn-reload').on('click', function() {
           window.location.replace('index.html?r='+Math.random());
@@ -69,7 +70,7 @@
       </div>
       <div class="row">
         <div class="col-xs-12 pull-right">
-          <button type="button" class="btn btn-danger btn-reload">Reload</button>
+          <button type="button" class="btn btn-danger btn-reload disabled">Reload</button>
         </div>
       </div>
           <p>Source: <a href="https://github.com/malgorithms/touchtones">github</a></p>
