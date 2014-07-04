@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Phone Tones</title>
+    <meta       name="viewport"    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js"     type="text/javascript"></script>
+    <link  href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style>
+      .btn {
+        margin-top:20px;
+        min-height:70px;
+        font-size:30px;
+      }
+    </style>
+    <script type="text/javascript">
+      print_button = function(num,f1,f2) {
+        var klass = (num == '*' || num == '#') ? 'btn-success' : 'btn-primary';
+        document.write('<div class="col-xs-4"><button type="button" '
+          + 'class="'+klass+' btn btn-block btn-lg" data-f1="'+f1+'" data-f2="'+f2+'">' 
+          + num + '</button></div>');
+      }
+      var osc1 = null;
+      var osc2 = null;
+      var ctx  = new AudioContext();
+      play = function() {
+          var f1 = $(this).data('f1');
+          var f2 = $(this).data('f2');
+          console.log(f1,f2);
+          osc1 = ctx.createOscillator();
+          osc1.frequency.value = f1;
+          osc1.connect(ctx.destination);
+          osc1.start(0);
+          osc2 = ctx.createOscillator();
+          osc2.frequency.value = f2;
+          osc2.connect(ctx.destination);
+          osc2.start(0);        
+      }
+      stop = function() {
+          if (osc1) {osc1.stop();}
+          if (osc2) {osc2.stop();}
+      }
+      $(function(){
+        $('.btn').on('mousedown', play);
+        $('.btn').on('mouseup', stop);
+        $('.btn').on('mouseout', stop);
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <script>
+          print_button(1,697,1209);
+          print_button(2,697,1336);
+          print_button(3,697,1477);
+        </script>
+      </div>
+      <div class="row">
+        <script>
+          print_button(4,770,1209);
+          print_button(5,770,1336);
+          print_button(6,770,1477);
+        </script>
+      </div>
+      <div class="row">
+        <script>
+          print_button(7,852,1209);
+          print_button(8,852,1336);
+          print_button(9,852,1477);
+        </script>
+      </div>
+      <div class="row">
+        <script>
+          print_button('*',941,1209);
+          print_button(0,  941,1336);
+          print_button('#',941,1477);
+        </script>
+      </div>
+      <div style="text-align:right;">
+        <p>Source: <a href="https://github.com/malgorithms/touchtones">github</a></p>
+    </div>
+  </body>
+</script>
