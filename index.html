@@ -24,14 +24,10 @@
         window.SOUNDS[name] = new buzz.sound('sound/DTMF-' + name, {formats:['mp3']});
       }
       $(function(){
-        $('.btn').on('mousedown', function() {
+        $('.btn').on('click', function() {
           var name = $(this).data('name');
           console.log(name);
           SOUNDS[name].play();
-        });
-        $('.btn').on('mouseup', function() {
-          var name = $(this).data('name');
-          SOUNDS[name].stop();
         });
       });
     </script>
