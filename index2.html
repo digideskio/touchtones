@@ -20,30 +20,29 @@
           + 'class="'+klass+' btn btn-block btn-lg" data-f1="'+f1+'" data-f2="'+f2+'">' 
           + num + '</button></div>');
       }
-      var osc1 = null;
-      var osc2 = null;
-      var ctx  = new AudioContext();
+          var ac   = webkitAudioContext;
+          var ctx1  = new ac();
+          var ctx2  = new ac();
       play = function() {
+          var osc1 = null;
+          var osc2 = null;
+          osc1 = ctx1.createOscillator();
+          osc2 = ctx1.createOscillator();
+          osc1.connect(ctx1.destination);
+          osc2.connect(ctx1.destination);
           var f1 = $(this).data('f1');
           var f2 = $(this).data('f2');
-          console.log(f1,f2);
-          osc1 = ctx.createOscillator();
+        console.log(f1,f2)
           osc1.frequency.value = f1;
-          osc1.connect(ctx.destination);
-          osc1.start(0);
-          osc2 = ctx.createOscillator();
+          osc1.start(1);
           osc2.frequency.value = f2;
-          osc2.connect(ctx.destination);
-          osc2.start(0);        
-      }
-      stop = function() {
-          if (osc1) {osc1.stop();}
-          if (osc2) {osc2.stop();}
+          osc2.start(1);
+          osc1.stop(2);
+          osc2.stop(2);
       }
       $(function(){
-        $('.btn').on('mousedown', play);
-        $('.btn').on('mouseup', stop);
-        $('.btn').on('mouseout', stop);
+        $('.btn').on('mousedown',  play);
+        $('.btn').on('touchstart', play);
       });
     </script>
   </head>
