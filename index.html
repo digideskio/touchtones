@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Phone Tones</title>
+    <script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js"     type="text/javascript"></script>
+    <script src="js/buzz.js"     type="text/javascript"></script>
+    <link  href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style>
+      .btn {
+        margin-top:5px;
+      }
+    </style>
+    <script type="text/javascript">
+      window.SOUNDS = {}
+      print_button = function(num,name) {
+        document.write('<div class="col-xs-4"><button type="button" '
+          + 'class="btn-primary btn btn-block btn-lg" data-name="'+name+'">' 
+          + num + '</button></div>');
+        window.SOUNDS[name] = new buzz.sound('sound/DTMF-' + name, {formats:['mp3']});
+      }
+      $(function(){
+        $('.btn').on('click', function() {
+          var name = $(this).data('name');
+          console.log(name);
+          SOUNDS[name].play();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <script>
+          print_button(1,1);
+          print_button(2,2);
+          print_button(3,3);
+        </script>
+      </div>
+      <div class="row">
+        <script>
+          print_button(4,4);
+          print_button(5,5);
+          print_button(6,6);
+        </script>
+      </div>
+      <div class="row">
+        <script>
+          print_button(7,7);
+          print_button(8,8);
+          print_button(9,9);
+        </script>
+      </div>
+      <div class="row">
+        <script>
+          print_button('*','star');
+          print_button(0,0);
+          print_button('#','pound');
+        </script>
+      </div>
+    </div>
+  </body>
+</script>
